@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate - Social Media Manager</title> <!-- Judul diperbarui untuk Premium -->
+    <title>Premium - Nama Kamu - Social Media Manager</title> <!-- Judul diperbarui untuk Premium -->
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KRCD6W30Y9"></script>
     <script>
@@ -27,6 +27,7 @@
             background: var(--background-gradient); /* Menggunakan variabel CSS untuk latar belakang */
             min-height: 100vh;
             transition: background 0.5s ease, color 0.5s ease; /* Transisi halus untuk perubahan mode */
+            scroll-behavior: smooth; /* Smooth scroll untuk seluruh halaman */
         }
 
         /* --- Mode Terang (Default) --- */
@@ -56,6 +57,20 @@
             --message-box-error-color: #721c24;
             --message-box-error-border: #f5c6cb;
             --profile-circle-bg: linear-gradient(45deg, #3498db, #2C3E50); /* tetap biru untuk foto profil */
+            --cv-button-bg: #E0E0E0; /* Warna latar belakang tombol CV di mode terang */
+            --cv-button-color: #2c3e50; /* Warna teks tombol CV di mode terang */
+            --advantage-card-bg: linear-gradient(135deg, #f0f2f5 0%, #e0e5ec 100%); /* Latar belakang kartu keuntungan */
+            --advantage-icon-color: #3498db; /* Warna ikon keuntungan */
+            
+            /* Warna Latar Belakang Kartu Strategi (Biru tua/abu-abu gelap di Light Mode) */
+            --strategy-card-solid-bg: #2C3E50; /* Biru tua/abu-abu gelap yang elegan */
+
+            /* Gradien untuk Garis Bergerak (Elegan di Light Mode) */
+            --glow-gradient: linear-gradient(90deg, #6495ED, #FF6F61, #6495ED); /* Cornflower Blue to Salmon */
+            
+            --navbar-bg: rgba(255, 255, 255, 0.9);
+            --navbar-text: #2c3e50;
+            --navbar-hover: #3498db;
         }
 
         /* --- Mode Gelap - Palet Warna Baru --- */
@@ -91,6 +106,16 @@
             --message-box-error-border: #dc3545;
 
             --profile-circle-bg: linear-gradient(45deg, #3498db, #2C3E50); /* tetap biru untuk foto profil */
+            --cv-button-bg: #3a3a3a; /* Warna latar belakang tombol CV di mode gelap */
+            --cv-button-color: #f0f0f0; /* Warna teks tombol CV di mode gelap */
+            --advantage-card-bg: linear-gradient(135deg, #282828 0%, #303030 100%); /* Latar belakang kartu keuntungan */
+            --advantage-icon-color: #64B5F6; /* Warna ikon keuntungan di mode gelap */
+
+            /* Warna Latar Belakang Kartu Strategi (Hitam di Dark Mode) */
+            --strategy-card-solid-bg: #0A0A0A; /* Hitam murni */
+
+            /* Gradien untuk Garis Bergerak (Lebih Cerah di Dark Mode untuk Kontras) */
+            --glow-gradient: linear-gradient(90deg, #A742F7, #42E0FB, #A742F7); /* Purple, Cyan for glow */
         }
 
         .container {
@@ -99,14 +124,64 @@
             padding: 20px;
         }
 
-        /* Header Section */
-        .header {
+        /* Navbar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--navbar-bg);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 10px var(--shadow-color);
+            z-index: 100; /* Pastikan di atas semua konten */
+            padding: 15px 20px;
+            text-align: center;
+            transition: background 0.5s ease, box-shadow 0.5s ease;
+        }
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar ul li a {
+            color: var(--navbar-text);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            padding: 5px 10px;
+            border-radius: 8px;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+        .navbar ul li a:hover,
+        .navbar ul li a.active-nav { /* Gaya untuk link aktif */
+            color: var(--navbar-hover);
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Padding untuk Body agar tidak tertutup Navbar */
+        body {
+            padding-top: 80px; /* Sesuaikan dengan tinggi navbar */
+        }
+
+        /* Page Section Styling: Semua konten visible dan di-scroll */
+        .page-section { /* Mengganti .page-content dengan .page-section untuk kejelasan */
+            padding-top: 20px; /* Padding untuk setiap section agar tidak tertutup navbar saat scroll */
+            padding-bottom: 20px; /* Agar ada jarak antar section */
+            margin-bottom: 30px; /* Jarak antar section, sesuaikan jika perlu */
+        }
+
+
+        /* Header Section (Home Section) */
+        .header { /* Menggunakan .header sebagai id "home" */
             background: var(--header-bg); /* Menggunakan variabel */
             backdrop-filter: none; /* Menghilangkan efek blur */
             border-radius: 20px;
             padding: 40px;
             text-align: center;
-            margin-bottom: 30px;
+            /* margin-bottom: 30px; */ /* Dikelola oleh .page-section */
             box-shadow: 0 20px 40px var(--shadow-color); /* Menggunakan variabel */
             transition: transform 0.3s ease, background 0.5s ease, box-shadow 0.5s ease;
             overflow: hidden;
@@ -115,6 +190,10 @@
         .header:hover {
             transform: translateY(-5px);
         }
+
+        /* Three.js Canvas Styling (Dihapus, sehingga komentar ini tidak lagi relevan) */
+        /* Konten header di atas canvas (Dihapus, sehingga komentar ini tidak lagi relevan) */
+
         .profile-img {
             width: 150px;
             height: 150px;
@@ -128,6 +207,12 @@
             color: white;
             font-weight: bold;
             overflow: hidden; /* Memastikan gambar pas di lingkaran */
+            /* Mikro-animasi: Putaran dan Bayangan saat hover */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .profile-img:hover {
+            transform: rotate(5deg) scale(1.05); /* Sedikit putaran dan zoom */
+            box-shadow: 0 0 25px var(--highlight-border); /* Glow warna highlight */
         }
         .profile-img img {
             width: 100%;
@@ -432,7 +517,7 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
-            transition: background 0.5s ease, box-shadow 0.5s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.5s ease;
         }
 
         @media (min-width: 768px) {
@@ -481,7 +566,6 @@
             font-size: 1.6em;
             font-weight: bold;
             display: block;
-            margin-bottom: 5px;
         }
 
         .stat-item .stat-label {
@@ -527,7 +611,7 @@
             padding: 40px;
             margin-bottom: 30px;
             box-shadow: 0 20px 40px var(--shadow-color); /* Menggunakan variabel */
-            text-align: center; /* Center the video title and description */
+            text-align: center;
             transition: background 0.5s ease, box-shadow 0.5s ease;
         }
 
@@ -554,7 +638,7 @@
             object-fit: contain; /* Ensures the whole video is visible, scales down if needed */
         }
 
-        /* New styles for the additional photos section */
+        /* Additional Photos Section */
         .additional-photos-section .photo-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjust minmax as needed for 2-4 cols */
@@ -594,6 +678,125 @@
             line-height: 1.4;
         }
 
+        /* Marketing Strategy Section (Ultimate Service Advantages) */
+        .marketing-strategy-section .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+            perspective: 1000px; /* Aktifkan perspektif 3D untuk grid */
+        }
+
+        .marketing-strategy-section .strategy-card {
+            color: white; /* Teks kartu akan selalu putih untuk kontras dengan gradien */
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease; /* Tambah background-color transisi */
+            position: relative;
+            overflow: hidden; /* Penting untuk efek border */
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* Warna latar belakang kartu itu sendiri, transparan agar gradiennya terlihat */
+            background-color: var(--strategy-card-solid-bg); /* Menggunakan variabel warna solid hitam */
+            
+            transform-style: preserve-3d; /* Penting untuk anak-anaknya memiliki 3D transform */
+        }
+
+        /* Efek Border Gradien Bergerak */
+        .marketing-strategy-section .strategy-card::before {
+            content: '';
+            position: absolute;
+            /* Make it slightly larger than the card to act as the border */
+            top: 0px; /* Disesuaikan agar garis berada tepat di pinggir */
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            z-index: -1; /* Di belakang konten kartu */
+            border-radius: 20px; /* Match parent's border-radius */
+            background: var(--glow-gradient); /* The animated gradient */
+            background-size: 400% 400%; /* Large background for smooth animation */
+            filter: blur(0px); /* REMOVE BLUR - for sharp line */
+            opacity: 1; /* Always visible for a solid line, subtlety comes from gradient colors */
+            animation: animateGlow 6s linear infinite; /* Animation speed */
+            
+            /* KEY for "line" effect: mask the inner part of the ::before */
+            mask: linear-gradient(black, black) content-box, linear-gradient(black, black) border-box;
+            -webkit-mask: linear-gradient(black, black) content-box, linear-gradient(black, black) border-box; /* Webkit prefix */
+            mask-composite: exclude;
+            -webkit-mask-composite: exclude; /* Webkit prefix */
+            
+            /* Properti border untuk menciptakan ketebalan garis */
+            border: 2px solid transparent; /* Tambahkan border transparan di sini */
+        }
+
+        /* Definisi animasi untuk garis gradien bergerak di sekitar kartu */
+        @keyframes animateGlow {
+            0% { background-position: 0% 0%; }
+            25% { background-position: 100% 0%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+
+
+        .marketing-strategy-section .strategy-card:hover::before {
+            opacity: 1; /* Keep solid */
+            /* filter: blur(0px); */ /* No blur on hover either */
+        }
+
+        /* Warna Gradien untuk Setiap Kartu Keunggulan (latar belakang kartu itu sendiri) */
+        /* Ini adalah gradien yang akan terlihat DI ATAS efek glow border yang bergerak */
+        /* Hapus properti background: var(--strategy-card-gradient-X); dari sini */
+        /* karena kita menggunakan background-color: var(--strategy-card-solid-bg); di .strategy-card */
+
+        /* Penting: Teks dalam kartu tetap putih untuk kontras dengan gradien latar belakang kartu */
+        .marketing-strategy-section .strategy-card .strategy-icon,
+        .marketing-strategy-section .strategy-card .strategy-title,
+        .marketing-strategy-section .strategy-card .strategy-description {
+            color: white;
+            position: relative; /* Pastikan konten di atas pseudo-element border */
+            z-index: 2; /* Di atas pseudo-element border */
+            /* Transisi untuk properti transform pada ikon */
+            transition: transform 0.5s ease;
+        }
+
+
+        .marketing-strategy-section .strategy-card:hover {
+            transform: translateY(-8px) scale(1.03); /* Lebih tinggi dan zoom sedikit */
+            box-shadow: 0 15px 35px var(--shadow-color); /* Bayangan lebih dramatis */
+            filter: brightness(1.1); /* Sedikit lebih cerah saat hover */
+        }
+
+        .marketing-strategy-section .strategy-icon {
+            font-size: 3.5em; /* Ukuran ikon lebih besar */
+            margin-bottom: 15px;
+            color: white; /* Ikon akan putih karena latar belakang kartu berwarna */
+            /* Transisi 3D untuk ikon */
+            transform-style: preserve-3d;
+        }
+        .marketing-strategy-section .strategy-card:hover .strategy-icon {
+            transform: rotateY(360deg) scale(1.2); /* Ikon berputar dan sedikit membesar */
+        }
+
+        .strategy-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: white; /* Judul akan putih */
+            margin-bottom: 10px;
+        }
+
+        .strategy-description {
+            font-size: 0.95em;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.9); /* Deskripsi sedikit transparan putih */
+        }
+
+
         /* Modal Styles for Contact Form */
         dialog {
             border: none;
@@ -608,7 +811,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 1000;
-            transition: background 0.5s ease;
+            transition: opacity 0.3s ease, transform 0.3s ease; /* Transisi untuk modal */
         }
         dialog::backdrop {
             background: rgba(0, 0, 0, 0.6);
@@ -707,11 +910,67 @@
             border: 1px solid var(--message-box-error-border); /* Menggunakan variabel */
         }
 
+        /* Modal AI Styles (General) */
+        .ai-modal {
+            border: none;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 50px var(--shadow-color);
+            max-width: 600px;
+            width: 90%;
+            background: var(--modal-bg);
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9); /* Default scale for smooth entry */
+            opacity: 0; /* Default hidden */
+            z-index: 1000;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .ai-modal.show-modal { /* Class added by JS to show modal */
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        .ai-modal::backdrop {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+        }
+        .ai-modal h3 {
+            color: var(--heading-color);
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            text-align: center;
+        }
+        .ai-results-area {
+            background: var(--section-bg);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            min-height: 100px;
+            max-height: 300px; /* Batasi tinggi area hasil */
+            overflow-y: auto; /* Aktifkan scrolling jika kontennya panjang */
+            border: 1px solid var(--input-border);
+            color: var(--text-color);
+            text-align: left; /* Biarkan teks hasil AI rata kiri */
+            white-space: pre-wrap; /* Pertahankan spasi dan baris baru */
+            word-wrap: break-word; /* Pastikan kata-kata panjang tidak keluar batas */
+            transition: background 0.5s ease, color 0.5s ease, border 0.5s ease;
+        }
+        .loading-indicator {
+            text-align: center;
+            margin-top: 15px;
+            font-style: italic;
+            color: var(--subtitle-color);
+        }
+
+
         /* Mode Toggle Button */
         .theme-toggle-button {
-            position: absolute;
+            position: fixed; /* Ubah ke fixed agar tidak terikat pada header */
             top: 20px;
             right: 20px;
+            left: auto; /* Pastikan tidak ada konflik dari kiri */
+            bottom: auto; /* Pastikan tidak ada konflik dari bawah */
             background: var(--section-bg);
             border: none;
             border-radius: 50%;
@@ -726,6 +985,10 @@
             font-size: 1.5em; /* Ukuran ikon */
             color: var(--heading-color); /* Warna ikon */
             z-index: 10; /* Pastikan di atas elemen lain */
+            /* Tambahan untuk draggable */
+            cursor: grab;
+            /* Pastikan tidak ada transform awal dari CSS jika JS akan mengelolanya */
+            transform: none; 
         }
 
         .theme-toggle-button:hover {
@@ -734,6 +997,7 @@
 
         .theme-toggle-button:active {
             transform: scale(0.9);
+            cursor: grabbing;
         }
 
         /* Responsif untuk tombol toggle */
@@ -744,6 +1008,50 @@
                 width: 40px;
                 height: 40px;
                 font-size: 1.2em;
+            }
+        }
+
+        /* CV Button */
+        #cvButton {
+            position: fixed; /* Ubah ke fixed agar tidak terikat pada header */
+            top: 20px; /* Pindahkan ke atas (kanan atas, bersama tombol tema) */
+            left: 20px;
+            right: auto; /* Pastikan tidak ada konflik dari kanan */
+            bottom: auto; /* Pastikan tidak ada konflik dari bawah */
+            background: var(--cv-button-bg); /* Menggunakan variabel */
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            transition: background 0.5s ease, box-shadow 0.5s ease, transform 0.2s ease, color 0.5s ease;
+            font-size: 1em; /* Ukuran teks/ikon */
+            font-weight: bold;
+            color: var(--cv-button-color); /* Menggunakan variabel */
+            text-decoration: none; /* Hilangkan underline karena ini link */
+            z-index: 10;
+        }
+
+        #cvButton:hover {
+            transform: scale(1.1);
+        }
+
+        #cvButton:active {
+            transform: scale(0.9);
+        }
+
+        /* Responsif untuk tombol CV */
+        @media (max-width: 768px) {
+            #cvButton {
+                top: 10px;
+                left: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 0.8em;
             }
         }
 
@@ -785,322 +1093,395 @@
 </head>
 <body>
     <div class="container">
-        <!-- Header Section -->
-        <div class="header">
-            <!-- Mode Toggle Button -->
-            <button id="themeToggle" class="theme-toggle-button">
-                ☀️ <!-- Ikon default: Matahari (mode terang) -->
-            </button>
+        <!-- Navbar -->
+        <nav class="navbar">
+            <ul>
+                <li><a href="#home-section" data-page="home-section">Home</a></li>
+                <li><a href="#about-section" data-page="about-section">About Me</a></li>
+                <li><a href="#portfolio-section" data-page="portfolio-section">Portfolio</a></li>
+                <li><a href="#advantages-section" data-page="advantages-section">Advantages</a></li>
+                <li><a href="#services-section" data-page="services-section">Services</a></li>
+                <li><a href="#contact-section" data-page="contact-section">Contact</a></li>
+            </ul>
+        </nav>
 
-            <div class="profile-img">
-                <!-- PLACE YOUR PROFILE PHOTO URL HERE -->
-                <img src="https://placehold.co/150x150/3498db/ffffff?text=NP" onerror="this.onerror=null;this.src='foto02.jpeg';" alt="Nama Kamu Profile Photo">
-            </div>
-            <h1 class="name">Nama Kamu</h1> <!-- Nama diganti -->
-            <p class="title">Social Media Management & Digital Marketing Specialist</p>
-            <p style="color: var(--subtitle-color); font-size: 1.1em; margin: 10px 0;">Business Management Graduate | 3D Concrete Printing Supervisor</p>
+        <!-- Home Page Content -->
+        <div id="home-section" class="page-section">
+            <!-- Header Section -->
+            <div class="header">
+                <!-- CV Button -->
+                <a href="your-cv-document.pdf" id="cvButton" target="_blank" title="View My CV">CV</a>
 
-            <div class="social-stats">
-                <div class="stat">
-                    <span class="stat-number">1M+</span>
-                    <span>Followers Managed</span>
+                <!-- Mode Toggle Button -->
+                <button id="themeToggle" class="theme-toggle-button">
+                    ☀️ <!-- Ikon default: Matahari (mode terang) -->
+                </button>
+
+                <div class="profile-img">
+                    <!-- PLACE YOUR PROFILE PHOTO URL HERE -->
+                    <img src="https://placehold.co/150x150/3498db/ffffff?text=NP" onerror="this.onerror=null;this.src='foto02.jpeg';" alt="Nama Kamu Profile Photo">
                 </div>
-                <div class="stat">
-                    <span class="stat-number">3+</span>
-                    <span>Years Experience</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">Multi</span>
-                    <span>Platform Expert</span>
+                <h1 class="name">Nama Kamu</h1> <!-- Nama diganti -->
+                <p class="title">Social Media Management & Digital Marketing Specialist</p>
+                <p style="color: var(--subtitle-color); font-size: 1.1em; margin: 10px 0;">Business Management Graduate | 3D Concrete Printing Supervisor</p>
+
+                <div class="social-stats">
+                    <div class="stat">
+                        <span class="stat-number">1M+</span>
+                        <span>Followers Managed</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">3+</span>
+                        <span>Years Experience</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">Multi</span>
+                        <span>Platform Expert</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- About Section -->
-        <div class="section">
-            <h2 class="section-title">About Me</h2>
-            <p style="font-size: 1.1em; color: var(--text-color); line-height: 1.8;">
-                Experienced Social Media Management specialist with a proven track record of managing high-profile accounts including Persib Bandung Football Club with over 1 million followers across multiple platforms. Combining business management education from Cyber University with hands-on experience in content strategy, TikTok advertising, and algorithm analysis. Currently serving as a Supervisor in 3D Concrete Printing while offering freelance social media management services. **My Premium service focuses on delivering unique UI/UX, advanced CSS animations, and seamless user journeys.**
-            </p>
+        <!-- About Me Page Content -->
+        <div id="about-section" class="page-section">
+            <!-- About Section -->
+            <div class="section">
+                <h2 class="section-title">About Me</h2>
+                <p style="font-size: 1.1em; color: var(--text-color); line-height: 1.8;">
+                    Experienced Social Media Management specialist with a proven track record of managing high-profile accounts including Persib Bandung Football Club with over 1 million followers across multiple platforms. Combining business management education from Cyber University with hands-on experience in content strategy, TikTok advertising, and algorithm analysis. Currently serving as a Supervisor in 3D Concrete Printing while offering freelance social media management services. **My Premium service focuses on delivering unique UI/UX, advanced CSS animations, and seamless user journeys.**
+                </p>
 
-            <div class="highlight">
-                <strong>🏆 Key Achievement:</strong> Successfully managed Persib Bandung's social media presence across TikTok, Facebook, and Instagram, maintaining engagement with 1M+ followers through strategic content planning and trend analysis.
-            </div>
-        </div>
-
-        <!-- Experience Section - Ini adalah versi Standard -->
-        <div class="section">
-            <h2 class="section-title">Professional Experience</h2>
-
-            <!-- Freelance Social Media Management (Ensured as topmost) -->
-            <div class="experience-item">
-                <div class="exp-title">Freelance Social Media Management</div>
-                <div class="exp-company">Various Clients</div>
-                <div class="exp-duration">Current</div>
-                <div class="exp-description">
-                    • Delivering comprehensive social media management services.<br>
-                    • Achieved significant growth metrics and engagement rates.<br>
-                    • Specialized in TikTok content strategy with 3 daily posts.<br>
-                    • Analytics-driven approach with proven ROI results.<br>
-                    • Multi-platform content optimization and trend analysis.
+                <div class="highlight">
+                    <strong>🏆 Key Achievement:</strong> Successfully managed Persib Bandung's social media presence across TikTok, Facebook, and Instagram, maintaining engagement with 1M+ followers through strategic content planning and trend analysis.
                 </div>
             </div>
 
-            <!-- Quality Check & Technician (Freelance) -->
-            <div class="experience-item">
-                <div class="exp-title">Quality Check & Technician, Freeze Dry Machine (Freelance)</div>
-                <div class="exp-company">Organic Supplement Production</div>
-                <div class="exp-duration">October 2024 - March 2025</div>
-                <div class="exp-description">
-                    • Performed product quality control and operated freeze dry machines for organic supplement production.<br>
-                    • Ensured production processes adhered to standards for high-quality output.
+            <!-- Experience Section - Ini adalah versi Standard -->
+            <div class="section">
+                <h2 class="section-title">Professional Experience</h2>
+
+                <!-- Freelance Social Media Management (Ensured as topmost) -->
+                <div class="experience-item">
+                    <div class="exp-title">Freelance Social Media Management</div>
+                    <div class="exp-company">Various Clients</div>
+                    <div class="exp-duration">Current</div>
+                    <div class="exp-description">
+                        • Delivering comprehensive social media management services.<br>
+                        • Achieved significant growth metrics and engagement rates.<br>
+                        • Specialized in TikTok content strategy with 3 daily posts.<br>
+                        • Analytics-driven approach with proven ROI results.<br>
+                        • Multi-platform content optimization and trend analysis.
+                    </div>
                 </div>
-            </div>
 
-            <div class="experience-item">
-                <div class="exp-title">Supervisor - 3D Concrete Printing</div>
-                <div class="exp-company">Indonesia 3D Concrete Printing Company</div>
-                <div class="exp-duration">Current Position</div>
-                <div class="exp-description">Leading operations and quality control in innovative 3D concrete printing technology, managing team workflows and ensuring project delivery standards.</div>
-            </div>
-            <div class="experience-item">
-                <div class="exp-title">Social Media Management (Remote)</div>
-                <div class="exp-company">Persib Bandung Football Club</div>
-                <div class="exp-duration">May 2022 - December 2024</div>
-                <div class="exp-description">
-                    • Managed 1M+ followers across TikTok, Facebook, and Instagram.<br>
-                    • Developed and executed comprehensive content strategies.<br>
-                    • Created engaging creative content aligned with brand identity.<br>
-                    • Managed TikTok Ads campaigns with optimized targeting.<br>
-                    • Conducted trend analysis and algorithm optimization.<br>
-                    • Maintained high engagement rates through data-driven approaches.
-                </div>
-            </div>
-            <div class="experience-item">
-                <div class="exp-title">CNC & Painting Specialist</div>
-                <div class="exp-company">Honda Automotive Manufacturing</div>
-                <div class="exp-duration">December 2019 - March 2022</div>
-                <div class="exp-description">Operated CNC machinery and managed painting processes in automotive production line, ensuring quality standards and production efficiency.</div>
-            </div>
-        </div>
-
-        <!-- Portfolio & Results Section - Ini adalah versi Standard -->
-        <div class="section">
-            <h2 class="section-title">Portfolio & Real Results</h2>
-            <p style="text-align: center; font-size: 1.1em; color: var(--text-color); margin-bottom: 40px;">
-                Showcasing growth, engagement, and strategic content management from actual projects.
-            </p>
-
-            <!-- Persib Bandung Results -->
-            <div class="portfolio-project">
-                <div class="project-details">
-                    <h3 class="project-title">🏆 Persib Bandung Football Club</h3>
-                    <p class="project-description">
-                        Managed the social media presence for Persib Bandung across TikTok, Facebook, and Instagram. Developed and executed content strategies, created engaging creatives, managed TikTok Ads, and performed extensive trend and algorithm analysis to maintain high engagement and follower growth.
-                    </p>
-                    <div class="project-stats">
-                        <div class="stat-item">
-                            <span class="stat-number">1M+</span>
-                            <span class="stat-label">Total Followers</span>
+                <!-- Quality Check & Technician (Freelance) -->
+                <div class="experience-item">
+                    <div class="exp-title">Quality Check & Technician, Freeze Dry Machine (Freelance)</div>
+                    <div class="exp-company">Organic Supplement Production</div>
+                    <div class="exp-duration">October 2024 - March 2025</div>
+                    <div class="exp-description">
+                        • Performed product quality control and operated freeze dry machines for organic supplement production.<br>
+                        • Ensured production processes adhered to standards for high-quality output.
+                    </div>
+                    </div>
+                    <div class="experience-item">
+                        <div class="exp-title">Supervisor - 3D Concrete Printing</div>
+                        <div class="exp-company">Indonesia 3D Concrete Printing Company</div>
+                        <div class="exp-duration">Current Position</div>
+                        <div class="exp-description">Leading operations and quality control in innovative 3D concrete printing technology, managing team workflows and ensuring project delivery standards.</div>
+                    </div>
+                    <div class="experience-item">
+                        <div class="exp-title">Social Media Management (Remote)</div>
+                        <div class="exp-company">Persib Bandung Football Club</div>
+                        <div class="exp-duration">May 2022 - December 2024</div>
+                        <div class="exp-description">
+                            • Managed 1M+ followers across TikTok, Facebook, and Instagram.<br>
+                            • Developed and executed comprehensive content strategies.<br>
+                            • Created engaging creative content aligned with brand identity.<br>
+                            • Managed TikTok Ads campaigns with optimized targeting.<br>
+                            • Conducted trend analysis and algorithm optimization.<br>
+                            • Maintained high engagement rates through data-driven approaches.
                         </div>
-                        <div class="stat-item">
-                            <span class="stat-number">8.6M+</span>
-                            <span class="stat-label">Monthly Views (TikTok)</span>
+                    </div>
+                    <div class="experience-item">
+                        <div class="exp-title">CNC & Painting Specialist</div>
+                        <div class="exp-company">Honda Automotive Manufacturing</div>
+                        <div class="exp-duration">December 2019 - March 2022</div>
+                        <div class="exp-description">Operated CNC machinery and managed painting processes in automotive production line, ensuring quality standards and production efficiency.</div>
+                    </div>
+                </div>
+        </div>
+
+        <!-- Portfolio Page Content -->
+        <div id="portfolio-section" class="page-section">
+            <!-- Portfolio & Real Results Section - Ini adalah versi Standard -->
+            <div class="section">
+                <h2 class="section-title">Portfolio & Real Results</h2>
+                <p style="text-align: center; font-size: 1.1em; color: var(--text-color); margin-bottom: 40px;">
+                    Showcasing growth, engagement, and strategic content management from actual projects.
+                </p>
+
+                <!-- Persib Bandung Results -->
+                <div class="portfolio-project">
+                    <div class="project-details">
+                        <h3 class="project-title">🏆 Persib Bandung Football Club</h3>
+                        <p class="project-description">
+                            Managed the social media presence for Persib Bandung across TikTok, Facebook, and Instagram. Developed and executed content strategies, created engaging creatives, managed TikTok Ads, and performed extensive trend and algorithm analysis to maintain high engagement and follower growth.
+                        </p>
+                        <div class="project-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">1M+</span>
+                                <span class="stat-label">Total Followers</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">8.6M+</span>
+                                <span class="stat-label">Monthly Views (TikTok)</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">3 Daily</span>
+                                <span class="stat-label">TikTok Posts</span>
+                            </div>
                         </div>
-                        <div class="stat-item">
-                            <span class="stat-number">3 Daily</span>
-                            <span class="stat-label">TikTok Posts</span>
+                    </div>
+                    <div class="project-images">
+                        <div class="project-image">
+                            <!-- Lazy Loading diterapkan -->
+                            <img loading="lazy" src="https://placehold.co/350x350/F0F0F0/B0B0B0?text=Image+1" onerror="this.onerror=null;this.src='persibig.jpeg';" alt="Persib Bandung Project Image 1">
+                        </div>
+                        <div class="project-image">
+                            <!-- Lazy Loading diterapkan -->
+                            <img loading="lazy" src="https://placehold.co/350x350/F0F0F0/B0B0B0?text=Image+2" onerror="this.onerror=null;this.src='persibtt.jpeg';" alt="Persib Bandung Project Image 2">
                         </div>
                     </div>
                 </div>
-                <div class="project-images">
-                    <div class="project-image">
+
+                <!-- E-commerce Brand X (Growth Case Study) -->
+                <div class="portfolio-project">
+                    <div class="project-details">
+                        <h3 class="project-title">📈 E-commerce Brand X (Growth Case Study)</h3>
+                        <p class="project-description">
+                            Implemented a new TikTok content strategy for an e-commerce brand, focusing on product demonstrations and user-generated content. Resulted in significant engagement and direct sales conversion.
+                        </p>
+                        <div class="project-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">75%</span>
+                                <span class="stat-label">Engagement Rate Increase</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">20%</span>
+                                <span class="stat-label">Sales Conversion Uplift</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">50K+</span>
+                                <span class="stat-label">New Followers</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-images">
+                        <div class="project-image">
+                            <!-- Lazy Loading diterapkan -->
+                            <img loading="lazy" src="https://placehold.co/350x350/F0F0F0/B0B0B0?text=Image+3" onerror="this.onerror=null;this.src='tt01.jpeg';" alt="E-commerce Project Image 1">
+                        </div>
+                        <div class="project-image">
+                            <!-- Lazy Loading diterapkan -->
+                            <img loading="lazy" src="https://placehold.co/350x350/F0F0F0/B0B0B0?text=Image+4" onerror="this.onerror=null;this.src='tt02.jpeg';" alt="E-commerce Project Image 2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Showcase Section -->
+            <div class="section video-showcase-section">
+                <h2 class="section-title">Video Showcase</h2>
+                <p style="font-size: 1.1em; color: var(--text-color); margin-bottom: 20px;">
+                    View a preview of your work or portfolio here. This can be videos from YouTube, Vimeo, or Pinterest.
+                </p>
+                <div class="responsive-video-container">
+                    <!-- TEMPATKAN KODE EMBED VIDEO ANDA DI SINI -->
+                    <!-- Untuk video dari Pinterest, Anda bisa mendapatkan kode "Embed" dari opsi "Share" di pin video.
+                         Contoh jika Anda mendapatkan kode iframe dari Pinterest:
+                         <iframe src="https://www.pinterest.com/pin/<ID_PIN>/embed/?autohide=true&autoplay=true&loop=false" height="400" width="400" frameborder="0" scrolling="no" ></iframe>
+                         Pastikan untuk menyesuaikan atribut height dan width, namun CSS responsive-video-container akan banyak membantu.
+                         
+                         Jika Anda memiliki tautan langsung ke file video (misalnya dari GitHub atau hosting Anda):
+                         <video controls>
+                             <source src="vid01.mp4" type="video/mp4">
+                             Browser Anda tidak mendukung tag video.
+                         </video>
+                    -->
+                    <!-- Contoh placeholder video lokal Anda sebelumnya (hapus atau ganti dengan video Pinterest Anda) -->
+                    <video loading="lazy" controls> <!-- Lazy Loading diterapkan -->
+                        <source src="vid01.mp4" type="video/mp4">
+                        Browser Anda tidak mendukung tag video.
+                    </video>
+                </div>
+                <p style="font-size: 0.9em; color: var(--subtitle-color); margin-top: 15px;">
+                    *Ensure videos uploaded to GitHub are small for best web performance. For larger videos, it is recommended to use YouTube, Vimeo, or obtain the embed code directly from platforms like Pinterest.
+                </p>
+            </div>
+
+            <!-- Additional Photos Section (Marketing Context) -->
+            <div class="section additional-photos-section">
+                <h2 class="section-title">Project Visuals & Insights</h2>
+                <p style="text-align: center; font-size: 1.1em; color: var(--text-color); margin-bottom: 20px;">
+                    Explore additional visual assets and key insights from various projects and works.
+                </p>
+                <div class="photo-grid">
+                    <div class="photo-item">
                         <!-- Lazy Loading diterapkan -->
-                        <img loading="lazy" src="https://placehold.co/350x350/F0F0F0/B0B0B0?text=Image+1" onerror="this.onerror=null;this.src='persibig.jpeg';" alt="Persib Bandung Project Image 1">
+                        <img loading="lazy" src="https://placehold.co/350x350/F0F0F0/B0B0B0?text=Image+5" onerror="this.onerror=null;this.src='bawah01.jpeg';" alt="Additional Photo 1">
+                        <p class="photo-title">Campaign Ideation Mockup</p> <!-- Judul disesuaikan -->
                     </div>
-                    <div class="project-image">
+                    <div class="photo-item">
                         <!-- Lazy Loading diterapkan -->
-                        <img loading="lazy" src="https://placehold.co/350x350/F0F0F0/B0B0B0?text=Image+2" onerror="this.onerror=null;this.src='persibtt.jpeg';" alt="Persib Bandung Project Image 2">
+                        <img loading="lazy" src="https://placehold.co/350x350/F0F0F0/B0B0B0?text=Image+6" onerror="this.onerror=null;this.src='bawah02.jpeg';" alt="Additional Photo 2">
+                        <p class="photo-title">Audience Engagement Analysis</p> <!-- Judul disesuaikan -->
                     </div>
-                </div>
-            </div>
-
-            <!-- E-commerce Brand X (Growth Case Study) -->
-            <div class="portfolio-project">
-                <div class="project-details">
-                    <h3 class="project-title">📈 E-commerce Brand X (Growth Case Study)</h3>
-                    <p class="project-description">
-                        Implemented a new TikTok content strategy for an e-commerce brand, focusing on product demonstrations and user-generated content. Resulted in significant engagement and direct sales conversion.
-                    </p>
-                    <div class="project-stats">
-                        <div class="stat-item">
-                            <span class="stat-number">75%</span>
-                            <span class="stat-label">Engagement Rate Increase</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">20%</span>
-                            <span class="stat-label">Sales Conversion Uplift</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">50K+</span>
-                            <span class="stat-label">New Followers</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-images">
-                    <div class="project-image">
+                    <div class="photo-item">
                         <!-- Lazy Loading diterapkan -->
-                        <img loading="lazy" src="https://placehold.co/350x350/F0F0F0/B0B0B0?text=Image+3" onerror="this.onerror=null;this.src='tt01.jpeg';" alt="E-commerce Project Image 1">
+                        <img loading="lazy" src="https://placehold.co/350x350/F0F0F0/B0B0B0?text=Image+7" onerror="this.onerror=null;this.src='bawah03.jpeg';" alt="Additional Photo 3">
+                        <p class="photo-title">Content Performance Chart</p> <!-- Judul disesuaikan -->
                     </div>
-                    <div class="project-image">
+                    <div class="photo-item">
                         <!-- Lazy Loading diterapkan -->
-                        <img loading="lazy" src="https://placehold.co/350x350/F0F0F0/B0B0B0?text=Image+4" onerror="this.onerror=null;this.src='tt02.jpeg';" alt="E-commerce Project Image 2">
+                        <img loading="lazy" src="https://placehold.co/350x350/F0F0F0/B0B0B0?text=Image+8" onerror="this.onerror=null;this.src='bawah04.jpeg';" alt="Additional Photo 4">
+                        <p class="photo-title">Strategic Partnership Visual</p> <!-- Judul disesuaikan -->
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Video Showcase Section -->
-        <div class="section video-showcase-section">
-            <h2 class="section-title">Video Showcase</h2>
-            <p style="font-size: 1.1em; color: var(--text-color); margin-bottom: 20px;">
-                View a preview of your work or portfolio here. This can be videos from YouTube, Vimeo, or Pinterest.
-            </p>
-            <div class="responsive-video-container">
-                <!-- TEMPATKAN KODE EMBED VIDEO ANDA DI SINI -->
-                <!-- Untuk video dari Pinterest, Anda bisa mendapatkan kode "Embed" dari opsi "Share" di pin video.
-                     Contoh jika Anda mendapatkan kode iframe dari Pinterest:
-                     <iframe src="https://www.pinterest.com/pin/<ID_PIN>/embed/?autohide=true&autoplay=true&loop=false" height="400" width="400" frameborder="0" scrolling="no" ></iframe>
-                     Pastikan untuk menyesuaikan atribut height dan width, namun CSS responsive-video-container akan banyak membantu.
-                     
-                     Jika Anda memiliki tautan langsung ke file video (misalnya dari GitHub atau hosting Anda):
-                     <video controls>
-                         <source src="vid01.mp4" type="video/mp4">
-                         Browser Anda tidak mendukung tag video.
-                     </video>
-                -->
-                <!-- Contoh placeholder video lokal Anda sebelumnya (hapus atau ganti dengan video Pinterest Anda) -->
-                <video loading="lazy" controls> <!-- Lazy Loading diterapkan -->
-                    <source src="vid01.mp4" type="video/mp4">
-                    Browser Anda tidak mendukung tag video.
-                </video>
-            </div>
-            <p style="font-size: 0.9em; color: var(--subtitle-color); margin-top: 15px;">
-                *Ensure videos uploaded to GitHub are small for best web performance. For larger videos, it is recommended to use YouTube, Vimeo, or obtain the embed code directly from platforms like Pinterest.
-            </p>
-        </div>
-
-        <!-- Additional Photos Section - Ini adalah versi Standard -->
-        <div class="section additional-photos-section">
-            <h2 class="section-title">Additional Photos</h2>
-            <p style="text-align: center; font-size: 1.1em; color: var(--text-color); margin-bottom: 20px;">
-                Additional visual gallery from various projects and works.
-            </p>
-            <div class="photo-grid">
-                <div class="photo-item">
-                    <!-- Lazy Loading diterapkan -->
-                    <img loading="lazy" src="https://placehold.co/350x350/F0F0F0/B0B0B0?text=Image+5" onerror="this.onerror=null;this.src='bawah01.jpeg';" alt="Additional Photo 1">
-                    <p class="photo-title">Project Campaign A</p> <!-- Subject/Judul Foto -->
-                </div>
-                <div class="photo-item">
-                    <!-- Lazy Loading diterapkan -->
-                    <img loading="lazy" src="https://placehold.co/350x350/F0F0F0/B0B0B0?text=Image+6" onerror="this.onerror=null;this.src='bawah02.jpeg';" alt="Additional Photo 2">
-                    <p class="photo-title">Content Strategy Meeting</p> <!-- Subject/Judul Foto -->
-                </div>
-                <div class="photo-item">
-                    <!-- Lazy Loading diterapkan -->
-                    <img loading="lazy" src="https://placehold.co/350x350/F0F0F0/B0B0B0?text=Image+7" onerror="this.onerror=null;this.src='bawah03.jpeg';" alt="Additional Photo 3">
-                    <p class="photo-title">Analytics Dashboard View</p> <!-- Subject/Judul Foto -->
-                </div>
-                <div class="photo-item">
-                    <!-- Lazy Loading diterapkan -->
-                    <img loading="lazy" src="https://placehold.co/350x350/F0F0F0/B0B0B0?text=Image+8" onerror="this.onerror=null;this.src='bawah04.jpeg';" alt="Additional Photo 4">
-                    <p class="photo-title">TikTok Ads Performance</p> <!-- Subject/Judul Foto -->
+        <!-- Advantages Page Content -->
+        <div id="advantages-section" class="page-section">
+            <!-- Marketing Strategy Section (Ultimate Service Advantages) -->
+            <div class="section marketing-strategy-section">
+                <h2 class="section-title">Ultimate Web Portfolio: Your Digital Edge</h2>
+                <p style="text-align: center; font-size: 1.1em; color: var(--text-color); margin-bottom: 20px;">
+                    This web portfolio isn't just a display of work; it's a living demonstration of the premium quality and strategic advantages you'll gain from our service.
+                    Here's what our Ultimate Web Portfolio service offers, including its unique benefits, pricing, and estimated delivery:
+                </p>
+                <div class="strategy-grid">
+                    <div class="strategy-card">
+                        <div class="strategy-icon">✨</div>
+                        <div class="strategy-title">Premium Visual Marketing</div>
+                        <div class="strategy-description">A custom-designed web portfolio with modern aesthetics, interactive light/dark modes, and unparalleled micro-animations to leave a lasting impression on every visitor.</div>
+                    </div>
+                    <div class="strategy-card">
+                        <div class="strategy-icon">⚙️</div>
+                        <div class="strategy-title">Advanced Technical Features</div>
+                        <div class="strategy-description">Equipped with lazy image loading for lightning-fast speed, an intuitive "Scroll to Top" button, Google Analytics integration for performance tracking, and a conversion-ready Formspree contact form.</div>
+                    </div>
+                    <div class="strategy-card">
+                        <div class="strategy-icon">📈</div>
+                        <div class="strategy-title">Designed for High Conversion</div>
+                        <div class="strategy-description">More than just a profile page, this is a complete digital marketing tool crafted to attract, impress, and convert visitors into valuable clients for your business.</div>
+                    </div>
+                    <div class="strategy-card">
+                        <div class="strategy-icon">💲</div>
+                        <div class="strategy-title">Ultimate Package Details: Pricing & Delivery</div>
+                        <div class="strategy-description">The investment for this Ultimate Web Portfolio is **Rp 20.000.000 - Rp 25.000.000**. Estimated custom project completion time is **3-4 weeks**. This price includes design, front-end development, interactive features, and basic integrations mentioned.</div>
+                    </div>
+                    <div class="strategy-card">
+                        <div class="strategy-icon">📊</div>
+                        <div class="strategy-title">Comprehensive Reporting & Strategy Refinement</div>
+                        <div class="strategy-description">Receive in-depth monthly performance reports with actionable insights and continuous strategy adjustments for optimal results.</div>
+                    </div>
+                    <div class="strategy-card">
+                        <div class="strategy-icon">💡</div>
+                        <div class="strategy-title">Proactive Trend Adaptation & Innovation</div>
+                        <div class="strategy-description">Benefit from constant market analysis and integration of the latest social media trends and tools to keep your brand always ahead.</div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Services Section -->
-        <div class="section">
-            <h2 class="section-title">Services Offered</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">📱</div>
-                    <div class="service-title">Content Strategy & Creation</div>
-                    <p>Comprehensive social media strategies tailored to your brand, with engaging content that drives results.</p>
+        <!-- Services Page Content -->
+        <div id="services-section" class="page-section">
+            <!-- Services Section -->
+            <div class="section">
+                <h2 class="section-title">Services Offered</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">📱</div>
+                        <div class="service-title">Content Strategy & Creation</div>
+                        <p>Comprehensive social media strategies tailored to your brand, with engaging content that drives results.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🎯</div>
+                        <div class="service-title">TikTok Ads Management</div>
+                        <p>Expert TikTok advertising campaigns with advanced targeting and optimization for maximum ROI.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">📊</div>
+                        <div class="service-title">Analytics & Trend Analysis</div>
+                        <p>Deep-dive analytics and trend monitoring to keep your content ahead of the curve.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🚀</div>
+                        <div class="service-title">Multi-Platform Management</div>
+                        <p>Seamless management across TikTok, Instagram, Facebook, and other social platforms.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">💡</div>
+                        <div class="service-title">Business Consulting</div>
+                        <p>Providing strategic guidance and innovative solutions for your business growth in the digital era.</p>
+                    </div>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">🎯</div>
-                    <div class="service-title">TikTok Ads Management</div>
-                    <p>Expert TikTok advertising campaigns with advanced targeting and optimization for maximum ROI.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">📊</div>
-                    <div class="service-title">Analytics & Trend Analysis</div>
-                    <p>Deep-dive analytics and trend monitoring to keep your content ahead of the curve.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🚀</div>
-                    <div class="service-title">Multi-Platform Management</div>
-                    <p>Seamless management across TikTok, Instagram, Facebook, and other social platforms.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">💡</div>
-                    <div class="service-title">Business Consulting</div>
-                    <p>Providing strategic guidance and innovative solutions for your business growth in the digital era.</p>
+            </div>
+
+            <!-- Skills Section -->
+            <div class="section">
+                <h2 class="section-title">Core Skills & Expertise</h2>
+                <div class="skills-container">
+                    <span class="skill-tag">Content Strategy</span>
+                    <span class="skill-tag">TikTok Marketing</span>
+                    <span class="skill-tag">Instagram Management</span>
+                    <span class="skill-tag">Facebook Marketing</span>
+                    <span class="skill-tag">Creative Content Creation</span>
+                    <span class="skill-tag">TikTok Ads</span>
+                    <span class="skill-tag">Algorithm Analysis</span>
+                    <span class="skill-tag">Trend Research</span>
+                    <span class="skill-tag">Analytics & Reporting</span>
+                    <span class="skill-tag">Brand Management</span>
+                    <span class="skill-tag">Remote Team Leadership</span>
+                    <span class="skill-tag">Project Management</span>
+                    <span class="skill-tag">Business Consulting</span>
                 </div>
             </div>
         </div>
 
-        <!-- Skills Section -->
-        <div class="section">
-            <h2 class="section-title">Core Skills & Expertise</h2>
-            <div class="skills-container">
-                <span class="skill-tag">Content Strategy</span>
-                <span class="skill-tag">TikTok Marketing</span>
-                <span class="skill-tag">Instagram Management</span>
-                <span class="skill-tag">Facebook Marketing</span>
-                <span class="skill-tag">Creative Content Creation</span>
-                <span class="skill-tag">TikTok Ads</span>
-                <span class="skill-tag">Algorithm Analysis</span>
-                <span class="skill-tag">Trend Research</span>
-                <span class="skill-tag">Analytics & Reporting</span>
-                <span class="skill-tag">Brand Management</span>
-                <span class="skill-tag">Remote Team Leadership</span>
-                <span class="skill-tag">Project Management</span>
-                <span class="skill-tag">Business Consulting</span>
-            </div>
-        </div>
-
-        <!-- Contact Section -->
-        <div class="section">
-            <h2 class="section-title">Let's Work Together</h2>
-            <p style="text-align: center; font-size: 1.2em; color: var(--text-color); margin-bottom: 30px;">
-                Ready to elevate your social media presence? Let's discuss how I can help grow your brand.
-            </p>
-            <div class="contact-info">
-                <div class="contact-item" id="emailContactTrigger"> <!-- ID ditambahkan untuk JavaScript -->
-                    <div class="contact-icon">📧</div>
-                    <h3>Email</h3>
-                    <p>Send a Message</p> <!-- Teks diubah untuk mengindikasikan form -->
+        <!-- Contact Page Content -->
+        <div id="contact-section" class="page-section">
+            <!-- Contact Section -->
+            <div class="section">
+                <h2 class="section-title">Let's Work Together</h2>
+                <p style="text-align: center; font-size: 1.2em; color: var(--text-color); margin-bottom: 30px;">
+                    Ready to elevate your social media presence? Let's discuss how I can help grow your brand.
+                </p>
+                <div class="contact-info">
+                    <div class="contact-item" id="emailContactTrigger"> <!-- ID ditambahkan untuk JavaScript -->
+                        <div class="contact-icon">📧</div>
+                        <h3>Email</h3>
+                        <p>Send a Message</p> <!-- Teks diubah untuk mengindikasikan form -->
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">💼</div>
+                        <h3>LinkedIn</h3>
+                        <p><a href="https://linkedin.com/in/nicolachristanto" target="_blank" rel="noopener noreferrer">linkedin.com/in/nicolachristanto</a></p>
+                    </div>
+                    <div class="contact-item">
+                        <a href="https://wa.me/62895329813921" target="_blank" rel="noopener noreferrer">
+                            <div class="contact-icon">📱</div>
+                            <h3>WhatsApp</h3>
+                            <p>0895329813921</p>
+                        </a>
+                    </div>
                 </div>
-                <div class="contact-item">
-                    <div class="contact-icon">💼</div>
-                    <h3>LinkedIn</h3>
-                    <p><a href="https://linkedin.com/in/nicolachristanto" target="_blank" rel="noopener noreferrer">linkedin.com/in/nicolachristanto</a></p>
-                </div>
-                <div class="contact-item">
-                    <a href="https://wa.me/62895329813921" target="_blank" rel="noopener noreferrer">
-                        <div class="contact-icon">📱</div>
-                        <h3>WhatsApp</h3>
-                        <p>0895329813921</p>
+                <div style="text-align: center;">
+                    <a href="https://wa.me/62895329813921" class="cta-button" target="_blank" rel="noopener noreferrer">
+                        <span class="cta-power-text">Start Your Project Today</span>
                     </a>
                 </div>
-            </div>
-            <div style="text-align: center;">
-                <a href="https://wa.me/62895329813921" class="cta-button" target="_blank" rel="noopener noreferrer">
-                    <span class="cta-power-text">Start Your Project Today</span>
-                </a>
             </div>
         </div>
     </div>
@@ -1137,6 +1518,55 @@
             <div id="formMessage" class="message-box" style="display: none;"></div>
         </form>
     </dialog>
+
+    <!-- Lightbox Modal for Images -->
+    <dialog id="imageLightbox" class="lightbox-modal">
+        <button class="lightbox-close-btn">&times;</button>
+        <img class="lightbox-img" src="" alt="Full size image">
+        <button class="lightbox-prev-btn">&larr;</button>
+        <button class="lightbox-next-btn">&rarr;</button>
+    </dialog>
+
+    <!-- AI Content Generator Modal -->
+    <dialog id="aiContentModal" class="ai-modal">
+        <h3>Generate Social Media Ideas ✨</h3>
+        <div class="form-group">
+            <label for="aiTopicInput">Topic/Keyword:</label>
+            <input type="text" id="aiTopicInput" placeholder="e.g., sustainable fashion, new tech gadget" required>
+        </div>
+        <div class="form-group">
+            <label for="aiPlatformInput">Platform (Optional):</label>
+            <input type="text" id="aiPlatformInput" placeholder="e.g., Instagram, TikTok, LinkedIn">
+        </div>
+        <div class="form-actions">
+            <button id="generateIdeasBtn">Generate Ideas ✨</button>
+            <button type="button" class="close-button" id="closeAiModal">Cancel</button>
+        </div>
+        <div id="aiLoadingIndicator" class="loading-indicator" style="display: none;">Generating ideas...</div>
+        <div id="aiResultsArea" class="ai-results-area"></div>
+        <div id="aiErrorMessage" class="message-box error" style="display: none;"></div>
+    </dialog>
+
+    <!-- AI Project Enhancer Modal -->
+    <dialog id="projectEnhancerModal" class="ai-modal">
+        <h3>Enhance Project Description ✨</h3>
+        <div class="form-group">
+            <label for="projectDescriptionInput">Current Project Description:</label>
+            <textarea id="projectDescriptionInput" placeholder="Enter a brief description of your project..." rows="5" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="desiredToneInput">Desired Tone (Optional):</label>
+            <input type="text" id="desiredToneInput" placeholder="e.g., professional, creative, concise, persuasive">
+        </div>
+        <div class="form-actions">
+            <button id="enhanceDescriptionBtn">Enhance Description ✨</button>
+            <button type="button" class="close-button" id="closeEnhancerModal">Cancel</button>
+        </div>
+        <div id="enhancerLoadingIndicator" class="loading-indicator" style="display: none;">Enhancing description...</div>
+        <div id="enhancedResultsArea" class="ai-results-area"></div>
+        <div id="enhancerErrorMessage" class="message-box error" style="display: none;"></div>
+    </dialog>
+
 
     <!-- Scroll to Top Button -->
     <button id="scrollToTopBtn" title="Go to top">⬆️</button>
@@ -1180,38 +1610,188 @@
                 }
             });
 
+            // Draggable Theme Toggle Button Logic
+            let isDragging = false;
+            let currentX;
+            let currentY;
+            let initialX;
+            let initialY;
+            let xOffset = 0; // x-translation
+            let yOffset = 0; // y-translation
 
-            const sections = document.querySelectorAll('.section, .header');
-            sections.forEach((section, index) => {
-                section.style.opacity = '0';
-                section.style.transform = 'translateY(50px)';
-                setTimeout(() => {
-                    section.style.transition = 'all 0.8s ease';
-                    section.style.opacity = '1';
-                    section.style.transform = 'translateY(0)';
-                }, index * 200);
+            // Helper to get current transform values
+            const getTranslateValues = (element) => {
+                const style = window.getComputedStyle(element);
+                const transform = style.transform || style.webkitTransform || style.mozTransform;
+
+                if (transform === 'none' || !transform) {
+                    return { x: 0, y: 0 };
+                }
+
+                const matrix = transform.match(/matrix.*\((.+)\)/);
+                if (matrix) {
+                    const matrixValues = matrix[1].split(', ').map(parseFloat);
+                    return { x: matrixValues[12] || matrixValues[4], y: matrixValues[13] || matrixValues[5] };
+                }
+                return { x: 0, y: 0 };
+            };
+
+
+            themeToggleBtn.addEventListener("touchstart", dragStart);
+            themeToggleBtn.addEventListener("touchend", dragEnd);
+            themeToggleBtn.addEventListener("touchmove", drag);
+
+            themeToggleBtn.addEventListener("mousedown", dragStart);
+            themeToggleBtn.addEventListener("mouseup", dragEnd);
+            themeToggleBtn.addEventListener("mousemove", drag);
+
+            function dragStart(e) {
+                // Get current translate values to account for previous drags
+                const currentTransform = getTranslateValues(themeToggleBtn);
+                xOffset = currentTransform.x;
+                yOffset = currentTransform.y;
+
+                if (e.type === "touchstart") {
+                    initialX = e.touches[0].clientX - xOffset;
+                    initialY = e.touches[0].clientY - yOffset;
+                } else {
+                    initialX = e.clientX - xOffset;
+                    initialY = e.clientY - yOffset; 
+                }
+
+                if (e.target === themeToggleBtn) {
+                    isDragging = true;
+                    themeToggleBtn.style.cursor = 'grabbing';
+                }
+            }
+
+            function dragEnd(e) {
+                isDragging = false;
+                localStorage.setItem('themeToggleOffsetX', xOffset);
+                localStorage.setItem('themeToggleOffsetY', yOffset);
+                themeToggleBtn.style.cursor = 'grab';
+            }
+
+            function drag(e) {
+                if (isDragging) {
+                    e.preventDefault(); 
+
+                    if (e.type === "touchmove") {
+                        currentX = e.touches[0].clientX - initialX;
+                        currentY = e.touches[0].clientY - initialY;
+                    } else {
+                        currentX = e.clientX - initialX;
+                        currentY = e.clientY - initialY;
+                    }
+
+                    // Constrain within viewport boundaries
+                    const rect = themeToggleBtn.getBoundingClientRect();
+                    const minX = -rect.left;
+                    const maxX = window.innerWidth - rect.right + xOffset;
+                    const minY = -rect.top;
+                    const maxY = window.innerHeight - rect.bottom + yOffset;
+                    
+                    xOffset = Math.max(minX, Math.min(maxX, currentX));
+                    yOffset = Math.max(minY, Math.min(maxY, currentY));
+
+                    themeToggleBtn.style.transform = `translate3d(${xOffset}px, ${yOffset}px, 0)`;
+                }
+            }
+
+            // Load saved position on startup or set default for non-dragged state
+            const savedOffsetX = localStorage.getItem('themeToggleOffsetX');
+            const savedOffsetY = localStorage.getItem('themeToggleOffsetY');
+
+            if (savedOffsetX !== null && savedOffsetY !== null) {
+                xOffset = parseFloat(savedOffsetX);
+                yOffset = parseFloat(savedOffsetY);
+                themeToggleBtn.style.transform = `translate3d(${xOffset}px, ${yOffset}px, 0)`;
+                // Remove initial positioning if dragged
+                themeToggleBtn.style.top = 'auto'; 
+                themeToggleBtn.style.right = 'auto';
+                themeToggleBtn.style.left = 'auto';
+                themeToggleBtn.style.bottom = 'auto';
+            } else {
+                // Default fixed position
+                themeToggleBtn.style.top = '20px'; 
+                themeToggleBtn.style.right = '20px';
+                themeToggleBtn.style.left = 'auto';
+                themeToggleBtn.style.bottom = 'auto';
+                themeToggleBtn.style.transform = 'none'; // No transform if not dragged yet
+            }
+            themeToggleBtn.style.cursor = 'grab'; // Default cursor for draggable
+
+            // On window resize, if button was dragged, re-constrain its position
+            window.addEventListener('resize', () => {
+                if (localStorage.getItem('themeToggleOffsetX') !== null) { // Only if it was previously dragged
+                    const currentTransform = getTranslateValues(themeToggleBtn);
+                    xOffset = currentTransform.x;
+                    yOffset = currentTransform.y;
+
+                    const rect = themeToggleBtn.getBoundingClientRect();
+                    const minX = -rect.left + currentTransform.x; // Adjust for current transform
+                    const maxX = window.innerWidth - rect.width + currentTransform.x;
+                    const minY = -rect.top + currentTransform.y;
+                    const maxY = window.innerHeight - rect.height + currentTransform.y;
+                    
+                    // Recalculate offsets based on new window size and current transform
+                    const newXOffset = Math.max(minX, Math.min(maxX, xOffset));
+                    const newYOffset = Math.max(minY, Math.min(maxY, yOffset));
+                    
+                    // Apply new transform
+                    themeToggleBtn.style.transform = `translate3d(${newXOffset}px, ${newYOffset}px, 0)`;
+                    localStorage.setItem('themeToggleOffsetX', newXOffset);
+                    localStorage.setItem('themeToggleOffsetY', newYOffset);
+                }
             });
 
-            const serviceCards = document.querySelectorAll('.service-card');
-            serviceCards.forEach(card => {
-                card.addEventListener('click', function() {
-                    this.style.transform = 'scale(0.95)';
-                    setTimeout(() => {
-                        this.style.transform = 'translateY(-10px) scale(1.02)';
-                    }, 150);
+            // Page Navigation Logic (Smooth Scroll to Sections)
+            const navLinks = document.querySelectorAll('.navbar a');
+            const sections = document.querySelectorAll('.page-section'); // Mengganti .page-content menjadi .page-section
+
+            // Click listener for smooth scrolling
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('data-page'); // Get the section ID
+                    const targetElement = document.getElementById(targetId);
+
+                    if (targetElement) {
+                        // Scroll smoothly to the target section
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
                 });
             });
 
-            // Removed original scroll background effect as it conflicts with gradient background
-            // window.addEventListener('scroll', function() {
-            //     const scrolled = window.pageYOffset;
-            //     const rate = scrolled * -0.05;
-            // });
+            // Intersection Observer for active navbar link highlighting
+            const observerOptions = {
+                root: null, // relative to the viewport
+                rootMargin: '0px 0px -50% 0px', // Trigger when section is in middle of viewport
+                threshold: 0 // As soon as any part of the section is visible
+            };
 
-            // Scroll to Top Button Logic
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Remove active class from all nav links
+                        navLinks.forEach(link => link.classList.remove('active-nav'));
+                        // Add active class to the corresponding nav link
+                        const activeLink = document.querySelector(`.navbar a[data-page="${entry.target.id}"]`);
+                        if (activeLink) {
+                            activeLink.classList.add('active-nav');
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            // Observe each section
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+
+
             const scrollToTopBtn = document.getElementById("scrollToTopBtn");
             
-            // When the user scrolls down 20px from the top of the document, show the button
             window.onscroll = function() {
                 if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
                     scrollToTopBtn.style.display = "block";
@@ -1220,97 +1800,329 @@
                 }
             };
 
-            // When the user clicks on the button, scroll to the top of the document
             scrollToTopBtn.addEventListener('click', function() {
                 window.scrollTo({
                     top: 0,
-                    behavior: 'smooth' // Smooth scroll
+                    behavior: 'smooth'
                 });
             });
 
-
-            // Premium Feature: Contact Form Modal Logic
             const contactFormModal = document.getElementById('contactFormModal');
             const emailContactTrigger = document.getElementById('emailContactTrigger');
             const closeModalButton = document.getElementById('closeModal');
             const contactForm = document.getElementById('contactForm');
             const formMessage = document.getElementById('formMessage');
-            const submitButton = contactForm.querySelector('button[type="submit"]'); // Get the submit button
+            const submitButton = contactForm.querySelector('button[type="submit"]');
 
-            // Open modal when Email contact item is clicked
             if (emailContactTrigger) {
                 emailContactTrigger.addEventListener('click', () => {
                     contactFormModal.showModal();
-                    formMessage.style.display = 'none'; // Hide previous messages
-                    formMessage.className = 'message-box'; // Reset message class
-                    contactForm.reset(); // Reset form fields
-                    submitButton.textContent = 'Send Message'; // Ensure button text is normal
-                    submitButton.disabled = false; // Ensure button is enabled
+                    formMessage.style.display = 'none';
+                    formMessage.className = 'message-box';
+                    contactForm.reset();
+                    submitButton.textContent = 'Send Message';
+                    submitButton.disabled = false;
                 });
             }
 
-            // Close modal when close button is clicked
             if (closeModalButton) {
                 closeModalButton.addEventListener('click', () => {
                     contactFormModal.close();
                 });
             }
 
-            // Handle form submission with Formspree
             if (contactForm) {
                 contactForm.addEventListener('submit', async function(event) {
-                    event.preventDefault(); // Prevent default form submission
-
-                    formMessage.style.display = 'none'; // Hide previous messages
-                    submitButton.textContent = 'Sending...'; // Show loading status
-                    submitButton.disabled = true; // Disable button while sending
+                    event.preventDefault();
+                    formMessage.style.display = 'none';
+                    submitButton.textContent = 'Sending...';
+                    submitButton.disabled = true;
 
                     const form = event.target;
-                    const formspreeUrl = form.action; // Get Formspree URL from form action attribute
-                    const formData = new FormData(form); // Create FormData object
+                    const formspreeUrl = form.action;
+                    const formData = new FormData(form);
 
                     try {
                         const response = await fetch(formspreeUrl, {
                             method: 'POST',
-                            body: formData, // Send FormData directly
-                            headers: {
-                                'Accept': 'application/json' // Important to receive AJAX response from Formspree
-                            }
+                            body: formData,
+                            headers: { 'Accept': 'application/json' }
                         });
 
-                        const result = await response.json(); // Response from Formspree
+                        const result = await response.json();
 
-                        if (response.ok && result.ok) { // Check success status from Formspree response
+                        if (response.ok && result.ok) {
                             formMessage.textContent = 'Your message has been sent successfully! I will contact you shortly.';
                             formMessage.className = 'message-box success';
-                            contactForm.reset(); // Clear form fields
-                            // After success, it might be good to automatically close the modal
+                            contactForm.reset();
                             setTimeout(() => {
                                 contactFormModal.close();
-                                formMessage.style.display = 'none'; // Hide message after modal closes
-                            }, 2000); // Close modal after 2 seconds
+                                formMessage.style.display = 'none';
+                            }, 2000);
                         } else {
                             let errorMessage = 'An error occurred while sending your message. Please try again later.';
                             if (result.errors) {
-                                // If there are specific errors from Formspree
                                 errorMessage = result.errors.map(err => err.message).join(', ');
                             } else if (result.error) {
-                                // Generic error from Formspree
                                 errorMessage = result.error;
                             }
                             formMessage.textContent = errorMessage;
                             formMessage.className = 'message-box error';
-                            console.error('Error response from Formspree:', result);
+                            console.error('Gemini API response structure unexpected:', result);
                         }
 
                     } catch (error) {
-                        formMessage.textContent = 'A connection error occurred. Please try again later.';
-                        formMessage.className = 'message-box error';
-                        console.error('Error submitting form:', error);
+                        formMessage.textContent = 'Error connecting to AI service. Please try again later.';
+                        formMessage.style.display = 'block';
+                        console.error('Error calling Gemini API:', error);
                     } finally {
-                        formMessage.style.display = 'block'; // Show message
-                        submitButton.textContent = 'Send Message'; // Reset button text
-                        submitButton.disabled = false; // Enable button again
+                        formMessage.style.display = 'block';
+                        submitButton.textContent = 'Send Message';
+                        submitButton.disabled = false;
+                    }
+                });
+            }
+
+            // Lightbox functionality
+            const imageLightbox = document.getElementById('imageLightbox');
+            const lightboxImg = imageLightbox.querySelector('.lightbox-img');
+            const lightboxCloseBtn = imageLightbox.querySelector('.lightbox-close-btn');
+            const lightboxPrevBtn = imageLightbox.querySelector('.lightbox-prev-btn');
+            const lightboxNextBtn = imageLightbox.querySelector('.lightbox-next-btn');
+            let currentImageIndex;
+            let galleryImages = [];
+
+            function openLightbox(imgSrc, index, imagesArray) {
+                lightboxImg.src = imgSrc;
+                currentImageIndex = index;
+                galleryImages = imagesArray; // Store the array of images
+
+                imageLightbox.showModal();
+                updateLightboxNavButtons();
+            }
+
+            function closeLightbox() {
+                imageLightbox.close();
+            }
+
+            function navigateLightbox(direction) {
+                currentImageIndex += direction;
+                if (currentImageIndex < 0) {
+                    currentImageIndex = galleryImages.length - 1;
+                } else if (currentImageIndex >= galleryImages.length) {
+                    currentImageIndex = 0;
+                }
+                lightboxImg.src = galleryImages[currentImageIndex];
+                updateLightboxNavButtons();
+            }
+
+            function updateLightboxNavButtons() {
+                lightboxPrevBtn.style.display = galleryImages.length > 1 ? 'block' : 'none';
+                lightboxNextBtn.style.display = galleryImages.length > 1 ? 'block' : 'none';
+            }
+
+            // Event listeners for images to open lightbox
+            document.querySelectorAll('.project-image img, .additional-photos-section .photo-item img').forEach((img, index, array) => {
+                img.addEventListener('click', () => {
+                    // Collect all image sources from the current gallery/section
+                    const allImagesInCurrentSection = Array.from(img.closest('.section').querySelectorAll('img')).map(el => el.src);
+                    const clickedIndex = allImagesInCurrentSection.indexOf(img.src);
+                    
+                    openLightbox(img.src, clickedIndex, allImagesInCurrentSection);
+                });
+            });
+
+            lightboxCloseBtn.addEventListener('click', closeLightbox);
+            lightboxPrevBtn.addEventListener('click', () => navigateLightbox(-1));
+            lightboxNextBtn.addEventListener('click', () => navigateLightbox(1));
+
+            // Close lightbox on backdrop click
+            imageLightbox.addEventListener('click', function(event) {
+                if (event.target === imageLightbox) {
+                    closeLightbox();
+                }
+            });
+
+            // AI Content Generator Logic
+            const aiContentModal = document.getElementById('aiContentModal');
+            const aiContentTriggerBtn = document.getElementById('aiContentTriggerBtn');
+            const closeAiModalBtn = document.getElementById('closeAiModal');
+            const aiTopicInput = document.getElementById('aiTopicInput');
+            const aiPlatformInput = document.getElementById('aiPlatformInput');
+            const generateIdeasBtn = document.getElementById('generateIdeasBtn');
+            const aiLoadingIndicator = document.getElementById('aiLoadingIndicator');
+            const aiResultsArea = document.getElementById('aiResultsArea');
+            const aiErrorMessage = document.getElementById('aiErrorMessage');
+
+            // Open AI Modal
+            if (aiContentTriggerBtn) {
+                aiContentTriggerBtn.addEventListener('click', () => {
+                    aiContentModal.showModal();
+                    aiResultsArea.innerHTML = ''; // Clear previous results
+                    aiErrorMessage.style.display = 'none'; // Hide error message
+                    aiLoadingIndicator.style.display = 'none'; // Hide loading indicator
+                    aiTopicInput.value = ''; // Clear input fields
+                    aiPlatformInput.value = '';
+                    generateIdeasBtn.disabled = false;
+                    generateIdeasBtn.textContent = 'Generate Ideas ✨';
+                });
+            }
+
+            // Close AI Modal
+            if (closeAiModalBtn) {
+                closeAiModalBtn.addEventListener('click', () => {
+                    aiContentModal.close();
+                });
+            }
+
+            // Generate Ideas Button Click
+            if (generateIdeasBtn) {
+                generateIdeasBtn.addEventListener('click', async () => {
+                    const topic = aiTopicInput.value.trim();
+                    const platform = aiPlatformInput.value.trim();
+
+                    if (!topic) {
+                        aiErrorMessage.textContent = 'Please enter a topic to generate ideas.';
+                        aiErrorMessage.style.display = 'block';
+                        return;
+                    }
+
+                    aiResultsArea.innerHTML = ''; // Clear previous results
+                    aiErrorMessage.style.display = 'none';
+                    aiLoadingIndicator.style.display = 'block'; // Show loading indicator
+                    generateIdeasBtn.disabled = true;
+                    generateIdeasBtn.textContent = 'Generating...';
+
+                    let prompt = `Generate 3-5 social media content ideas for the topic "${topic}".`;
+                    if (platform) {
+                        prompt += ` Focus on the platform "${platform}".`;
+                    }
+                    prompt += ` Include relevant hashtags and emojis for each idea. Format as a numbered list.`;
+
+                    try {
+                        const chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+                        const payload = { contents: chatHistory };
+                        const apiKey = ""; // Leave as-is, Canvas will provide it
+                        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        const result = await response.json();
+
+                        if (result.candidates && result.candidates.length > 0 &&
+                            result.candidates[0].content && result.candidates[0].content.parts &&
+                            result.candidates[0].content.parts.length > 0) {
+                            const text = result.candidates[0].content.parts[0].text;
+                            aiResultsArea.innerHTML = `<pre>${text}</pre>`; // Display as pre-formatted text
+                        } else {
+                            aiErrorMessage.textContent = 'Could not generate ideas. Please try again.';
+                            aiErrorMessage.style.display = 'block';
+                            console.error('Gemini API response structure unexpected:', result);
+                        }
+                    } catch (error) {
+                        aiErrorMessage.textContent = 'Error connecting to AI service. Please try again later.';
+                        aiErrorMessage.style.display = 'block';
+                        console.error('Error calling Gemini API:', error);
+                    } finally {
+                        aiLoadingIndicator.style.display = 'none'; // Hide loading indicator
+                        generateIdeasBtn.disabled = false;
+                        generateIdeasBtn.textContent = 'Generate Ideas ✨';
+                    }
+                });
+            }
+
+            // AI Project Enhancer Logic
+            const projectEnhancerModal = document.getElementById('projectEnhancerModal');
+            const enhanceProjectTriggerBtn = document.getElementById('enhanceProjectTriggerBtn'); // New button ID
+            const closeEnhancerModalBtn = document.getElementById('closeEnhancerModal');
+            const projectDescriptionInput = document.getElementById('projectDescriptionInput');
+            const desiredToneInput = document.getElementById('desiredToneInput');
+            const enhanceDescriptionBtn = document.getElementById('enhanceDescriptionBtn');
+            const enhancerLoadingIndicator = document.getElementById('enhancerLoadingIndicator');
+            const enhancedResultsArea = document.getElementById('enhancedResultsArea');
+            const enhancerErrorMessage = document.getElementById('enhancerErrorMessage');
+
+            // Open AI Project Enhancer Modal
+            if (enhanceProjectTriggerBtn) {
+                enhanceProjectTriggerBtn.addEventListener('click', () => {
+                    projectEnhancerModal.showModal();
+                    enhancedResultsArea.innerHTML = ''; // Clear previous results
+                    enhancerErrorMessage.style.display = 'none'; // Hide error message
+                    enhancerLoadingIndicator.style.display = 'none'; // Hide loading indicator
+                    projectDescriptionInput.value = ''; // Clear input fields
+                    desiredToneInput.value = '';
+                    enhanceDescriptionBtn.disabled = false;
+                    enhanceDescriptionBtn.textContent = 'Enhance Description ✨';
+                });
+            }
+
+            // Close AI Project Enhancer Modal
+            if (closeEnhancerModalBtn) {
+                closeEnhancerModalBtn.addEventListener('click', () => {
+                    projectEnhancerModal.close();
+                });
+            }
+
+            // Enhance Description Button Click
+            if (enhanceDescriptionBtn) {
+                enhanceDescriptionBtn.addEventListener('click', async () => {
+                    const description = projectDescriptionInput.value.trim();
+                    const tone = desiredToneInput.value.trim();
+
+                    if (!description) {
+                        enhancerErrorMessage.textContent = 'Please enter a project description.';
+                        enhancerErrorMessage.style.display = 'block';
+                        return;
+                    }
+
+                    enhancedResultsArea.innerHTML = ''; // Clear previous results
+                    enhancerErrorMessage.style.display = 'none';
+                    enhancerLoadingIndicator.style.display = 'block'; // Show loading indicator
+                    enhanceDescriptionBtn.disabled = true;
+                    enhanceDescriptionBtn.textContent = 'Enhancing...';
+
+                    let prompt = `Enhance the following project description for a professional portfolio.`;
+                    if (tone) {
+                        prompt += ` The tone should be "${tone}".`;
+                    }
+                    prompt += ` Make it more compelling, detailed, and impactful. Original description: "${description}"`;
+
+                    try {
+                        const chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+                        const payload = { contents: chatHistory };
+                        const apiKey = ""; // Leave as-is, Canvas will provide it
+                        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        const result = await response.json();
+
+                        if (result.candidates && result.candidates.length > 0 &&
+                            result.candidates[0].content && result.candidates[0].content.parts &&
+                            result.candidates[0].content.parts.length > 0) {
+                            const text = result.candidates[0].content.parts[0].text;
+                            enhancedResultsArea.innerHTML = `<pre>${text}</pre>`; // Display as pre-formatted text
+                        } else {
+                            enhancerErrorMessage.textContent = 'Could not enhance description. Please try again.';
+                            enhancerErrorMessage.style.display = 'block';
+                            console.error('Gemini API response structure unexpected:', result);
+                        }
+                    } catch (error) {
+                        enhancerErrorMessage.textContent = 'Error connecting to AI service. Please try again later.';
+                        enhancerErrorMessage.style.display = 'block';
+                        console.error('Error calling Gemini API:', error);
+                    } finally {
+                        enhancerLoadingIndicator.style.display = 'none'; // Hide loading indicator
+                        enhanceDescriptionBtn.disabled = false;
+                        enhanceDescriptionBtn.textContent = 'Enhance Description ✨';
                     }
                 });
             }
@@ -1318,3 +2130,4 @@
     </script>
 </body>
 </html>
+
